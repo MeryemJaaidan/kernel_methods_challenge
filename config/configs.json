@@ -1,0 +1,10 @@
+{
+    "training_data": "data/training_data.pkl",
+    "training_labels":"data/training_labels.pkl",
+    "test_data": "data/test_data.pkl",
+    "results": "data/results.pkl",
+    "seed": 42,
+    "n_estimators": 100,
+    "clf" : "lr",
+    "vervbose": 1
+}

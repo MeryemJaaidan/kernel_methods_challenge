@@ -1,6 +1,6 @@
 # kernel_methods_challenge
 
-Authors: Meryem Jaaidan
+Author : Meryem Jaaidan
 
 Github repository with methods implemented from scratch from the data challenge from the Kernel Methods course at MVA.
 
