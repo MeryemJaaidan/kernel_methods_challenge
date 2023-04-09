@@ -12,11 +12,17 @@ import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import time
 
 from src.utils import *
+from src.models import kernelSVM
+from src.kernels import K_n_walk
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data', type = str, default = 'data/training_data.pkl')
+parser.add_argument('--method', type = str, default = 'KernelSVM')
+
 args = parser.parse_args()
 
 print('-----Options-----')
@@ -27,3 +33,26 @@ print('-----End-----')
 training = pd.read_pickle(args.data)
 labels = pd.read_pickle('data/training_labels.pkl')
 
+# training only on a part of training data to reduce the Kernel computation time
+indx = np.arange(100)
+train_data = training[indx] 
+train_labels = labels[indx]
+val_data = pd.read_pickle('data/test_data.pkl')[indx] 
+
+## Compute Kernel
+print("----- Computing Kernel ------")
+begin = time.time()
+K_train = K_n_walk(train_data)
+K_test = K_n_walk(val_data)
+
+end = time.time()
+print("----- Kernels computed in {:.2f} minutes ------".format((end - begin)/60))
+
+## Train SVM model
+clf = kernelSVM(lmbd=0.01, loss='squared_hinge',reformated = True)
+clf.train(K_train, train_labels)
+
+## Predict output
+y_pred = clf.predict(K_test)
+
+print("----- Labels predicted ------\n", y_pred)
