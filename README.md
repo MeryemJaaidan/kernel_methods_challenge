@@ -1,6 +1,6 @@
 # kernel_methods_challenge
 
-Author : Meryem Jaaidan and Wenjia Fang
+Authors : Meryem Jaaidan and Wenjia Fang
 
 Github repository with methods implemented from scratch from the data challenge from the Kernel Methods course at MVA.
 
