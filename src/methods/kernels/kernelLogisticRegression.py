@@ -35,12 +35,9 @@ class KernelLogisticRegression:
         self.X = X
         self.y = y
         print("Go")
-        #opt = scipy.optimize.fmin_l_bfgs_b(lambda w: self._J(w, X, y), x0 = np.zeros(n), fprime = lambda w: self._gradJ(w, X, y), maxiter = 100, pgtol = 1e-4)
-        #opt = scipy.optimize.minimize(lambda w: self._J(w, X, y), x0 = np.zeros(d), jac =  lambda w: self._gradJ(w, X, y), options = {'maxiter': 100})
         opt = scipy.optimize.minimize(self.func , x0 = np.zeros(n), method="L-BFGS-B", jac =  True, options = {'maxiter': 100, "gtol": 1e-4})
         print("Done")
         self.coef = opt.x
-        
         return
 
     def predict(self, X):
